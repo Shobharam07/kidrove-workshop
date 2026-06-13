@@ -89,25 +89,17 @@ npm run dev:server
 
 Frontend: `http://localhost:5173`
 
-Backend: `http://localhost:4000`
+Backend: `http://localhost:5000`
 
 ## Backend Environment
 
 Create `server/.env` from `server/.env.example`:
 
 ```bash
-PORT=4000
+PORT=5000
 CLIENT_ORIGIN=http://localhost:5173
-MONGODB_URI=
 ```
 
-MongoDB is optional. If `MONGODB_URI` is set, enquiries are saved through Mongoose. If it is empty, the server logs validated enquiries to the console.
-
-Example MongoDB URI:
-
-```bash
-MONGODB_URI=mongodb://127.0.0.1:27017/kidrove_workshop
-```
 
 ## Registration Submission Snippet
 
@@ -123,7 +115,6 @@ const response = await fetch(`${import.meta.env.VITE_API_URL ?? "http://localhos
     name: formData.name.trim(),
     email: formData.email.trim(),
     phone: formData.phone.trim(),
-    workshopId: "ai-robotics-summer-2026"
   })
 });
 
