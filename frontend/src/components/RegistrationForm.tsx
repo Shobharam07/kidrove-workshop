@@ -3,7 +3,7 @@ import type { FormErrors, RegistrationFormData, RegistrationPayload } from "../t
 import styles from "../styles/WorkshopPage.module.css";
 
 const WORKSHOP_ID = "ai-robotics-summer-2026";
-const API_BASE_URL = "https://kidrove-workshop-l1sv.onrender.com/";
+const API_BASE_URL = "https://kidrove-workshop-l1sv.onrender.com";
 
 const initialFormData: RegistrationFormData = {
   name: "",
