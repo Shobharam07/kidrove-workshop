@@ -136,7 +136,6 @@ Request:
   "name": "Aarav Sharma",
   "email": "parent@example.com",
   "phone": "9876543210",
-  "workshopId": "ai-robotics-summer-2026"
 }
 ```
 
