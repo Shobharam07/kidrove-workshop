@@ -7,8 +7,8 @@ It includes a responsive landing page for parents/students and a backend API to 
 
 ## Live Deployment
 
-- Frontend (Vercel): https://kidrove-workshop-ten.vercel.app
-- Backend (Render): https://kidrove-workshop-l1sv.onrender.com
+- Frontend (Vercel demo): https://kidrove-workshop-ten.vercel.app
+- Backend (Render demo): https://kidrove-workshop-l1sv.onrender.com
 
 ## Problem Solved
 
@@ -127,6 +127,7 @@ Notes:
 - If `MONGODB_URI` is not provided, enquiries are logged to server console.
 - CORS origin is currently set in `backend/src/index.ts`.
 - Frontend API base URL is currently set in `frontend/src/components/RegistrationForm.tsx`.
+- Recommended production improvement: move both CORS origin and API base URL to environment variables.
 
 ## API Documentation
 
