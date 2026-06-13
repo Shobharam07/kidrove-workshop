@@ -1,145 +1,147 @@
 # Kidrove AI & Robotics Summer Workshop
 
-Responsive React + TypeScript landing page with a minimal Express API for workshop enquiries.
+## Internship Evaluation Submission (Internshala)
 
-## Confirmed Choices
+This project is a full-stack workshop enquiry application built for the **Kidrove AI & Robotics Summer Workshop**.
+It includes a responsive landing page for parents/students and a backend API to receive and store enquiries.
 
-- Styling: CSS Modules
-- State management: local React component state
-- Backend: Express.js with validation, CORS, and optional MongoDB persistence
-- MongoDB setup details: included below
+## Live Deployment
 
-## Phased Plan
+- Frontend (Vercel): https://kidrove-workshop-ten.vercel.app
+- Backend (Render): https://kidrove-workshop-l1sv.onrender.com
 
-### MVP
+## Problem Solved
 
-1. Create the responsive landing page with hero, details, FAQ, and registration form.
-2. Add client-side validation for name, email, and phone.
-3. Add `POST /api/enquiry` with required-field validation and JSON responses.
-4. Wire the form to the backend with `fetch`.
-5. Document local setup for frontend and backend.
+The app helps Kidrove collect workshop registrations in a clean and user-friendly way:
 
-### Enhancements
+- Presents workshop details, outcomes, and FAQs.
+- Validates user inputs before submission.
+- Sends enquiry data to backend API.
+- Persists enquiries to MongoDB when configured.
+- Falls back to server logging if DB is not connected.
 
-1. Persist enquiries in MongoDB when `MONGODB_URI` is configured.
-2. Add spam protection such as rate limiting or CAPTCHA.
-3. Add analytics for enroll button and form completion.
-4. Add email confirmation or CRM forwarding.
-5. Expand tests for form validation and API validation.
+## Tech Stack
 
-## Code Structure
+### Frontend
+- React 19
+- TypeScript
+- Vite
+- CSS Modules
+
+### Backend
+- Node.js
+- Express
+- TypeScript
+- Mongoose
+- CORS + dotenv
+
+## Key Features
+
+1. **Responsive workshop landing page**
+   - Hero section with CTA
+   - Workshop details and learning outcomes
+   - FAQ section
+
+2. **Registration form with validation**
+   - Name required
+   - Email format validation
+   - Phone format validation
+   - Submission success and error states
+
+3. **Backend enquiry API**
+   - Endpoint: `POST /api/enquiry`
+   - Server-side validation
+   - Standard success/error JSON responses
+   - Optional MongoDB storage
+
+4. **Health endpoint**
+   - Endpoint: `GET /health`
+   - Useful for deployment checks
+
+## Project Structure
 
 ```text
 kidrove-workshop/
-  client/
-    public/
-      assets/
-        workshop-hero.png
-    src/
-      components/
-        Details.tsx
-        FAQ.tsx
-        Hero.tsx
-        RegistrationForm.tsx
-        WorkshopPage.tsx
-      styles/
-        WorkshopPage.module.css
-      App.tsx
-      main.tsx
-      types.ts
-      vite-env.d.ts
-    index.html
-    package.json
-    tsconfig.json
-    vite.config.ts
-  server/
-    src/
-      models/
-        Enquiry.ts
-      routes/
-        enquiry.ts
-      index.ts
-    .env.example
-    package.json
-    tsconfig.json
-  package.json
-  README.md
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── styles/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   └── types.ts
+│   ├── public/assets/
+│   └── package.json
+├── backend/
+│   ├── src/
+│   │   ├── models/Enquiry.ts
+│   │   ├── routes/enquiry.ts
+│   │   └── index.ts
+│   └── package.json
+├── package.json
+└── README.md
 ```
 
-## Run Locally
+## Local Setup Instructions
 
-Install all dependencies:
+### 1) Clone repository
 
 ```bash
-npm run install:all
+git clone https://github.com/Shobharam07/kidrove-workshop.git
+cd kidrove-workshop
 ```
 
-Run both frontend and backend:
+### 2) Install dependencies
 
 ```bash
-npm run dev
+npm install
+npm --prefix frontend install
+npm --prefix backend install
 ```
 
-Or run separately:
+### 3) Run frontend and backend (separate terminals)
+
+Terminal 1:
+```bash
+npm --prefix backend run dev
+```
+
+Terminal 2:
+```bash
+npm --prefix frontend run dev
+```
+
+Local URLs:
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:7000`
+
+## Backend Environment Variables
+
+Create a `.env` file inside `/backend`:
 
 ```bash
-npm run dev:client
-npm run dev:server
+PORT=7000
+MONGODB_URI=<your_mongodb_connection_string>
 ```
 
-Frontend: `http://localhost:5173`
+Notes:
+- If `MONGODB_URI` is not provided, enquiries are logged to server console.
+- CORS origin and frontend API base URL are currently configured in code for deployed URLs.
 
-Backend: `http://localhost:5000`
+## API Documentation
 
-## Backend Environment
+### `POST /api/enquiry`
 
-Create `server/.env` from `server/.env.example`:
-
-```bash
-PORT=5000
-CLIENT_ORIGIN=http://localhost:5173
-```
-
-
-## Registration Submission Snippet
-
-This is the core form submission flow used by the React registration form:
-
-```ts
-const response = await fetch(`${import.meta.env.VITE_API_URL ?? "http://localhost:4000"}/api/enquiry`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    name: formData.name.trim(),
-    email: formData.email.trim(),
-    phone: formData.phone.trim(),
-  })
-});
-
-const result = await response.json();
-
-if (!response.ok) {
-  throw new Error(result.message ?? "Unable to submit enquiry.");
-}
-```
-
-## API Contract
-
-`POST /api/enquiry`
-
-Request:
+#### Request Body
 
 ```json
 {
   "name": "Aarav Sharma",
   "email": "parent@example.com",
-  "phone": "9876543210",
+  "phone": "9876543210"
 }
 ```
 
-Success response:
+#### Success Response (`201`)
 
 ```json
 {
@@ -148,7 +150,7 @@ Success response:
 }
 ```
 
-Validation error response:
+#### Validation Error (`400`)
 
 ```json
 {
@@ -159,3 +161,32 @@ Validation error response:
   }
 }
 ```
+
+#### Server Error (`500`)
+
+```json
+{
+  "success": false,
+  "message": "Something went wrong. Please try again later."
+}
+```
+
+## Build Commands
+
+```bash
+npm --prefix frontend run build
+npm --prefix backend run build
+```
+
+## Future Improvements
+
+- Move API base URL and allowed CORS origin to environment variables.
+- Add rate limiting / CAPTCHA to reduce spam.
+- Add automated tests (frontend form + backend API).
+- Add admin dashboard for viewing enquiries.
+
+## Author
+
+**Shobharam**
+
+Submission prepared for internship evaluation on Internshala.
