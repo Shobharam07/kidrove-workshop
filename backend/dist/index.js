@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 import { enquiryRouter } from "./routes/enquiry.js";
 dotenv.config();
 const app = express();
-const port = Number(process.env.PORT ?? 4000);
-const clientOrigin = process.env.CLIENT_ORIGIN ?? "http://localhost:5173";
+const port = Number(process.env.PORT ?? 7000);
+const clientOrigin = "https://kidrove-workshop-ten.vercel.app";
 const mongoUri = process.env.MONGODB_URI;
 app.use(cors({
     origin: clientOrigin,
