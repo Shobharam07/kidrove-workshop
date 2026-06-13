@@ -9,7 +9,6 @@ It includes a responsive landing page for parents/students and a backend API to 
 
 - Frontend (Vercel): https://kidrove-workshop-ten.vercel.app
 - Backend (Render): https://kidrove-workshop-l1sv.onrender.com
-- Note: deployment links should be re-verified before sharing externally.
 
 ## Problem Solved
 
