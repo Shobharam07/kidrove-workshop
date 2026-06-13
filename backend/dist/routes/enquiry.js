@@ -20,9 +20,6 @@ function validatePayload(payload) {
     else if (!phonePattern.test(payload.phone.trim())) {
         errors.phone = "Enter a valid phone number.";
     }
-    if (!payload.workshopId?.trim()) {
-        errors.workshopId = "Workshop ID is required.";
-    }
     return errors;
 }
 export const enquiryRouter = Router();
@@ -40,8 +37,7 @@ enquiryRouter.post("/", async (request, response, next) => {
         const enquiry = {
             name: payload.name.trim(),
             email: payload.email.trim().toLowerCase(),
-            phone: payload.phone.trim(),
-            workshopId: payload.workshopId.trim()
+            phone: payload.phone.trim()
         };
         if (mongoose.connection.readyState === 1) {
             await Enquiry.create(enquiry);

@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/details.tsx","./src/components/faq.tsx","./src/components/hero.tsx","./src/components/registrationform.tsx","./src/components/workshoppage.tsx"],"version":"5.9.3"}
+{"root":["./src/App.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/Details.tsx","./src/components/FAQ.tsx","./src/components/Hero.tsx","./src/components/RegistrationForm.tsx","./src/components/WorkshopPage.tsx"],"version":"5.9.3"}
