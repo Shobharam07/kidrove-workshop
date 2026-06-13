@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 const port = Number(process.env.PORT ?? 7000);
-const clientOrigin = process.env.CLIENT_ORIGIN ?? "http://localhost:5173";
+const clientOrigin = process.env.CLIENT_ORIGIN ?? "https://kidrove-workshop-ten.vercel.app/";
 const mongoUri = process.env.MONGODB_URI;
 
 app.use(
